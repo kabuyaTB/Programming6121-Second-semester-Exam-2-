@@ -3,93 +3,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/UnitTests/JUnit5TestClass.java to edit this template
  */
 
+package productsales_q2;
 
-package productsalesapplication;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
-
+/**
+ * Q.2.5: Unit tests
+ */
 public class ProductSalesTest {
     
-    @Test
-    public void GetSalesOverLimit_ReturnsNumberOfSales() {
-        // Arrange
-        int[][] testData = {
-            {300, 150, 700},  // Year 1
-            {250, 200, 600}   // Year 2
-        };
-        int salesLimit = 500;
-        ProductSales productSales = new ProductSales(testData, salesLimit);
-        
-        // Act
-        int result = productSales.GetSalesOverLimit();
-        
-        // Assert
-        assertEquals(2, result); // 700 and 600 are over 500
-    }
+    private ProductSales instance;
     
-    @Test
-    public void GetSalesUnderLimit_ReturnsNumberOfSales() {
-        // Arrange
-        int[][] testData = {
-            {300, 150, 700},  // Year 1
-            {250, 200, 600}   // Year 2
-        };
-        int salesLimit = 500;
-        ProductSales productSales = new ProductSales(testData, salesLimit);
-        
-        // Act
-        int result = productSales.GetSalesUnderLimit();
-        
-        // Assert
-        assertEquals(4, result); // 300, 150, 250, 200 are under/equal to 500
+    @BeforeEach
+    public void setUp() {
+        // Create a new instance for each test
+        instance = new ProductSales();
     }
-    
+
+    /**
+     * Test Name: GetSalesOverLimit_ReturnsNumberOfSales
+     * Test Purpose: To determine that the correct values
+     * are returned when the GetSalesOverLimit method is called.
+     */
     @Test
-    public void GetTotalSales_ReturnsCorrectTotal() {
-        // Arrange
-        int[][] testData = {
-            {300, 150, 700},
-            {250, 200, 600}
-        };
-        ProductSales productSales = new ProductSales(testData, 500);
-        
-        // Act
-        int result = productSales.GetTotalSales();
-        
-        // Assert
-        assertEquals(2200, result);
+    public void testGetSalesOverLimit_ReturnsNumberOfSales() {
+        System.out.println("Test: GetSalesOverLimit");
+        // From our data and logic, we expect 2 (700, 800)
+        int expected = 2;
+        int result = instance.GetSalesOverLimit();
+        assertEquals(expected, result);
     }
-    
+
+    /**
+     * Test Name: GetSalesUnderLimit_ReturnsNumberOfSales
+     * Test Purpose: To determine that the correct values
+     * are returned when the GetSalesUnderLimit method is called.
+     */
     @Test
-    public void GetAverageSales_ReturnsCorrectAverage() {
-        // Arrange
-        int[][] testData = {
-            {300, 150, 700},
-            {250, 200, 600}
-        };
-        ProductSales productSales = new ProductSales(testData, 500);
-        
-        // Act
-        double result = productSales.GetAverageSales();
-        
-        // Assert
-        assertEquals(366.67, result, 0.01);
-    }
-    
-    @Test
-    public void GetProductsProcessed_ReturnsNumberOfYears() {
-        // Arrange
-        int[][] testData = {
-            {300, 150, 700},
-            {250, 200, 600}
-        };
-        ProductSales productSales = new ProductSales(testData, 500);
-        
-        // Act
-        int result = productSales.GetProductsProcessed();
-        
-        // Assert
-        assertEquals(2, result);
+    public void testGetSalesUnderLimit_ReturnsNumberOfSales() {
+        System.out.println("Test: GetSalesUnderLimit");
+        // From our data and logic, we expect 4 (150, 250, 200, 600)
+        int expected = 4;
+        int result = instance.GetSalesUnderLimit();
+        assertEquals(expected, result);
     }
 }
